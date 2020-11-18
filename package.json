@@ -1,0 +1,51 @@
+{
+  "name": "simplens",
+  "main": "./app.js",
+  "displayName": "Simple App",
+  "version": "1.0.0",
+  "description": "",
+  "author": "mehdinourollah",
+  "license": "",
+  "repository": "https://github.com/mehdinourollah/simplens",
+  "homepage": "https://github.com/mehdinourollah/",
+  "bugs": {
+    "url": "https://github.com/NativeScript/NativeScript/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "nstudio",
+    "nativescript",
+    "mobile",
+    "{N}",
+    "tns",
+    "vue",
+    "nativescript-vue",
+    "template",
+    "master-detail",
+    "detail",
+    "category-general"
+  ],
+  "dependencies": {
+    "@nativescript/core": "~7.0.0",
+    "@nativescript/theme": "~2.3.0",
+    "@nstudio/nativescript-cardview": "^2.0.0",
+    "axios": "^0.20.0",
+    "nativescript-vue": "~2.8.0",
+    "vuex": "^3.5.1"
+  },
+  "devDependencies": {
+    "@babel/core": "~7.1.0",
+    "@babel/preset-env": "~7.1.0",
+    "@nativescript/android": "7.0.0",
+    "@nativescript/types": "~7.0.0",
+    "@nativescript/webpack": "~3.0.0",
+    "babel-loader": "~8.0.0",
+    "copy-webpack-plugin": "^4.6.0",
+    "nativescript-vue-template-compiler": "~2.8.0",
+    "node-sass": "^4.7.1",
+    "typescript": "~3.9.0",
+    "vue-loader": "~15.9.3"
+  }
+}

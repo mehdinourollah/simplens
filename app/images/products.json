@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "name": "Dana Kiyma",
+        "image": "~/images/dana-kiyma.jpg",
+        "price": "13,60",
+        "url": "https://www.sokmarket.com.tr/dana-kiyma-400-gr-p-26795/",
+        "description": "Lezzetlim Dana Kıyma 400 Gr"
+    },
+    {
+        "id": 1,
+        "name": "Piliç Izgara",
+        "image": "~/images/pilic-izgara.jpg",
+        "price": "25,95",
+        "url": "https://www.sokmarket.com.tr/pilic-izgara-kanat-kg-p-26116/",
+        "description": "Tadpi Piliç Izgara Kanat Kg"
+    },
+    {
+        "id": 2,
+        "name": "Sucuk",
+        "image": "~/images/sucuk.jpg",
+        "price": "21,95",
+        "url": "https://www.sokmarket.com.tr/kangal-sucuk-isil-islem-250-gr-p-3798/",
+        "description": "Namet Kangal Sucuk Isıl İşlem 250 Gr"
+    }
+]
