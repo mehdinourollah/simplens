@@ -10,13 +10,7 @@
           fontSize="15"
           fontWeight="bold"
         />
-        <StackLayout
-          class="view"
-          ref="profile"
-          rowSpan="2"
-          col="2"
-          marginRight="10"
-        >
+        <StackLayout ref="profile" rowSpan="2" col="2" marginRight="10">
           <Label
             col="2"
             padding="0"

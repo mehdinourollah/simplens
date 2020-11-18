@@ -13,7 +13,7 @@
       >
         <StackLayout row="1" rowSpan="3" colSpan="2">
           <Image
-            class="view"
+            
             ref="logo"
             src="~/images/ns.png"
             stretch="aspectFit"
@@ -65,6 +65,7 @@ export default {
   },
 
   mounted() {
+    
     this.$refs.logo.nativeView
       .animate({
         scale: { x: 2, y: 2 },
