@@ -1,9 +1,5 @@
 <template>
-  <Page
-    @navigatingFrom="onNavigatingFrom"
-    @loaded="onLoaded"
-    backgroundSpanUnderStatusBar="true"
-  >
+  <Page @loaded="onLoaded" backgroundSpanUnderStatusBar="true">
     <ActionBar title="" flat="true">
       <GridLayout rows="*,*" columns="*,*,*">
         <Label
@@ -14,30 +10,37 @@
           fontSize="15"
           fontWeight="bold"
         />
-
-        <Label
-          row="1"
+        <StackLayout
+          class="view"
+          ref="profile"
+          rowSpan="2"
           col="2"
-          padding="0"
-          margin="0"
-          text="Profile"
-          textWrap="true"
-          textAlignment="center"
-          horizontalAlignment="right"
-          fontSize="10"
-          @tap="gotoProfile"
-        />
-        <Label
-          col="2"
-          padding="0"
-          margin="0"
-          class="fas"
-          text.decode="&#xf2bd;"
-          textWrap="true"
-          horizontalAlignment="right"
-          fontSize="30"
-          @tap="gotoProfile"
-        />
+          marginRight="10"
+        >
+          <Label
+            col="2"
+            padding="0"
+            marginTop="2"
+            class="fas"
+            text.decode="&#xf2bd;"
+            textWrap="true"
+            horizontalAlignment="right"
+            fontSize="30"
+            @tap="gotoProfile"
+          />
+          <Label
+            row="1"
+            col="2"
+            padding="0"
+            margin="0"
+            text="Profile"
+            textWrap="true"
+            textAlignment="center"
+            horizontalAlignment="right"
+            fontSize="10"
+            @tap="gotoProfile"
+          />
+        </StackLayout>
       </GridLayout>
     </ActionBar>
     <StackLayout>
@@ -51,8 +54,8 @@
       <Progress v-if="!isLoaded" :value="currentProgress" />
 
       <ListView
-        for="(p,index) in products"
         v-else
+        for="(p,index) in products"
         @itemTap="onItemTap"
         separatorColor="transparent"
       >
@@ -117,10 +120,10 @@ export default {
       this.$navigateTo(Profile);
     },
     gotoProduct(item) {
-      // console.log({item})
+      // console.log({ item });
       this.$navigateTo(Product, {
         props: {
-          //
+          product: item.item,
         },
       });
     },
@@ -141,4 +144,22 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@keyframes example {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.15);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+.view {
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
 </style>

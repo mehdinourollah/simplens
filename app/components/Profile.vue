@@ -139,7 +139,7 @@
 import axios from "axios";
 import Product from "./Product";
 import Home from "./Home";
-
+import Login from "./Login";
 export default {
   data() {
     return {
@@ -151,17 +151,18 @@ export default {
 
   methods: {
     logout() {
-      alert({
+      confirm({
         title: "Logging out",
         message: "You are about to logout from the app. Are you sure?",
         okButtonText: "Yes",
         cancelButtonText: "No",
       }).then((result) => {
         console.log(result);
-        return;
-        this.$navigateTo(Login, {
-          clearHistory: true,
-        });
+
+        if (result)
+          this.$navigateTo(Login, {
+            clearHistory: true,
+          });
       });
     },
     gotoHome() {

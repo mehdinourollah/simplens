@@ -1,59 +1,44 @@
 <template>
   <Page @loaded="onLoaded">
-    <ActionBar flat="true">
-      <Label
-        color="white"
-        :text="episode ? episode.episode : ''"
-        textWrap="true"
-      />
-
+    <ActionBar title="" flat="true">
+      <StackLayout orientation="horizontal">
+        <Label text="Profile" textWrap="true" fontSize="15" fontWeight="bold" />
+      </StackLayout>
       <NavigationButton
         text="Back"
         android.systemIcon="ic_menu_back"
-        @tap="goBack"
+        @tap="$navigateBack"
+        border="0"
       />
       <ActionItem
-        text="Home"
+        icon="\uf501"
         android.systemIcon="ic_menu_home"
+        key=""
+        text="Profile"
         ios.position="left"
-        @tap="goHome"
+        @tap="gotoHome"
       />
     </ActionBar>
-    <StackLayout>
-      <ActivityIndicator
-        :busy="!isLoaded"
-        v-if="!isLoaded"
-        marginTop="10"
-        width="100"
-        height="100"
-      />
-      <CardView v-else margin="10" elevation="40" radius="5">
+    <ScrollView>
+      <CardView margin="10" elevation="40" radius="5">
         <StackLayout paddingLeft="20" marginTop="20">
           <Label textWrap="true" margin="0">
             <FormattedString>
-              <Span :text="episode.name" fontWeight="bold" fontSize="20" />
+              <Span :text="product.name" fontWeight="bold" fontSize="20" />
             </FormattedString>
           </Label>
           <!-- <Label :text="episode.name" /> -->
-          <Label :text="episode.air_date" />
-          <Label :text="episode.episode" />
-          <Label text="Characters: " textWrap="true" />
-
-          <ListView
-            for="(c,index) in characters"
-            @itemTap="onItemTap"
-            height="auto"
-            marginTop="10"
-          >
-            <v-template>
-              <StackLayout height="auto">
-                <Label :text="c.name" />
-              </StackLayout>
-            </v-template>
-          </ListView>
+          <Label :text="product.price + ' ₺'" />
+          <Label :text="product.description" />
+          <Image :src="product.image" stretch="fill" />
+          <Label  textWrap="true">
+            <FormattedString>
+              <Span :text="product.url" fontWeight="bold" fontSize="20" />
+            </FormattedString>
+          </Label>
         </StackLayout>
       </CardView>
-    </StackLayout>
+    </ScrollView>
   </Page>
 </template>
 
@@ -63,16 +48,13 @@ import Profile from "./Profile";
 import Home from "./Home";
 
 export default {
-  props: ["episode_url"],
+  props: ["product"],
   data() {
-    return {
-      isLoaded: false,
-      episode: {},
-      characters: [],
-      url: "",
-    };
+    return {};
   },
-
+  mounted() {
+    console.log(this.product);
+  },
   methods: {
     goBack() {
       this.$navigateBack();
@@ -83,59 +65,9 @@ export default {
         clearHistory: true,
       });
     },
-    onItemTap(item) {
-      this.gotoCharacter(item.item);
-    },
-    gotoCharacter(url) {
-      this.$navigateTo(Character, {
-        props: {
-          character_url: url,
-        },
-      });
-    },
-    onLoaded() {
-      this.getEpisode();
-    },
-    getEpisode() {
-      this.isLoaded = false;
-
-      axios(this.episode_url)
-        .then((res) => {
-          this.episode = res.data;
-
-          let characters_urls = this.episode.characters;
-
-          let requestsPromises = [];
-
-          characters_urls.forEach((x) => {
-            requestsPromises.push(axios(x));
-          });
-
-          let characters = [];
-          Promise.all(requestsPromises)
-            .then((results) => {
-              characters = results.map((x) => x.data);
-
-              this.characters = characters;
-
-              this.isLoaded = true;
-            })
-            .catch((err) => console.log(err));
-          // });
-        })
-        .catch((err) => {
-          console.log(err);
-          alert("Network error!");
-        });
-    },
   },
 };
 </script>
 
 <style scoped lang="scss">
-
-
-* {
-  color: black;
-}
 </style>

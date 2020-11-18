@@ -5,17 +5,37 @@
     androidStatusBarBackground="white"
   >
     <StackLayout>
-      <GridLayout rows="*,*,*,*" columns="*,*" margin="10" class="text-center">
-        <StackLayout row="1" colSpan="2">
+      <GridLayout
+        rows="*,*,*,*,*,*"
+        columns="*,*"
+        margin="0 10"
+        class="text-center"
+      >
+        <StackLayout row="1" rowSpan="3" colSpan="2">
+          <Image
+            class="view"
+            ref="logo"
+            src="~/images/ns.png"
+            stretch="aspectFit"
+            width="50%"
+            height="200"
+          />
+
           <!-- <Label text="username" textWrap="true" /> -->
-          <TextField class="text-center" hint="username" v-model="username" />
         </StackLayout>
-        <StackLayout row="2" colSpan="2">
+        <StackLayout row="3" colSpan="2" rowSpan="2">
+          <TextField class="text-field" hint="Email" v-model="username"  />
+          <TextField
+            class="text-field"
+            secure
+            hint="Password"
+            v-model="password"
+           
+          />
           <!-- <Label text="password" textWrap="true" /> -->
-          <TextField secure hint="username" v-model="password" />
         </StackLayout>
-        <StackLayout row="3" colSpan="2">
-          <Button @tap="gotoHome">Login</Button>
+        <StackLayout row="5" colSpan="2">
+          <Button class="button" ref="button" @tap="gotoHome">Login</Button>
         </StackLayout>
       </GridLayout>
     </StackLayout>
@@ -25,6 +45,7 @@
 <script>
 import axios from "axios";
 import Home from "./Home";
+import { isAndroid } from "@nativescript/core/platform";
 
 function validateEmail(email) {
   const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -35,8 +56,8 @@ export default {
   data() {
     return {
       isLoaded: false,
-      username: "",
-      password: "",
+      username: "valid@email.com",
+      password: "password",
       currentValue: 0,
       maxValue: 100,
       url: "",
@@ -44,12 +65,32 @@ export default {
   },
 
   mounted() {
+    this.$refs.logo.nativeView
+      .animate({
+        scale: { x: 2, y: 2 },
+        duration: 1500,
+        // curve: enums.AnimationCurve.easeIn,
+      })
+      .then(() => {
+        console.log("Done");
+      });
     // console.log("MOUNTED");
     // this.getData();
   },
 
   methods: {
     gotoHome() {
+      this.$refs.button.nativeView
+        .animate({
+          scale: { x: 0.7, y: 0.7 },
+          duration: 200,
+        })
+        .then(() => {
+          this.$refs.button.nativeView.animate({
+            scale: { x: 1, y: 1 },
+            duration: 200,
+          });
+        });
       // const alertOptions = {
       //   title: "Race selection",
       //   message: "Race chosen: Unicorn",
@@ -90,7 +131,26 @@ export default {
 </script>
 
 <style scoped lang="scss">
-* {
-  color: black;
+Page {
+  background-color: tomato;
+}
+
+@keyframes example {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.5);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+.view {
+  animation-name: example;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
 }
 </style>

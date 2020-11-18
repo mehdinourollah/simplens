@@ -22,7 +22,7 @@ Vue.registerElement(
 );
 
 new Vue({
-  render: h => h('frame', [h(Fake)]),
+  render: h => h('frame', [h(Login)]),
   store: store,
 }).$start();
 
